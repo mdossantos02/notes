@@ -199,3 +199,65 @@ sh script.sh          # Run with sh
 - `man command` – the built-in manual
 - `tldr command` – simplified help pages (install with `npm install -g tldr`)
 - [https://explainshell.com](https://explainshell.com) – for breaking down commands
+
+
+---
+
+## 🔐 SSH Setup and Key Authentication
+
+### 🛠️ Installing OpenSSH Server (Debian/Ubuntu)
+
+```bash
+sudo apt update
+sudo apt install openssh-server
+sudo systemctl start ssh
+sudo systemctl enable ssh
+```
+
+### 🔓 Allow SSH Through Firewall (UFW)
+
+```bash
+sudo ufw allow ssh
+sudo ufw enable
+```
+
+### ✅ Generate SSH Key Pair (on the client)
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+- Private key: `~/.ssh/id_rsa`
+- Public key: `~/.ssh/id_rsa.pub`
+
+### 📤 Copy the Public Key to the Server
+
+```bash
+ssh-copy-id your_user@server_ip
+```
+
+Or manually copy `~/.ssh/id_rsa.pub` contents into the server’s:
+
+```
+~/.ssh/authorized_keys
+```
+
+### 🔐 Permissions (on the server)
+
+```bash
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
+
+### 🚀 Connect to Server Using Key
+
+```bash
+ssh your_user@server_ip
+```
+
+Or, if using a custom key file:
+
+```bash
+ssh -i ~/.ssh/your_key_file your_user@server_ip
+```
+
