@@ -196,3 +196,65 @@ node server.js
 cd frontend
 npm start
 ```
+
+---
+
+## 🛠 Step-by-Step: Installing Node.js and Setting Up in VS Code
+
+### 🧩 Step 1: Install Node.js
+
+1. Go to the [Node.js download page](https://nodejs.org/)
+2. Download the **LTS version** for your OS.
+3. Run the installer and follow the prompts (accept defaults).
+4. Verify installation:
+   ```bash
+   node -v
+   npm -v
+   ```
+
+### 🧩 Step 2: Set Up VS Code
+
+1. Download and install [Visual Studio Code](https://code.visualstudio.com/)
+2. Open VS Code and install the following extensions:
+   - **ESLint** (for JavaScript/React linting)
+   - **Prettier** (code formatting)
+   - **DotENV** (for highlighting `.env` files)
+
+### 🧩 Step 3: Initialize Backend
+
+1. Open a terminal in VS Code.
+2. Run the following to set up backend:
+   ```bash
+   mkdir backend
+   cd backend
+   npm init -y
+   npm install express pg cors dotenv
+   ```
+
+### 🧩 Step 4: Initialize Frontend
+
+1. Open a new terminal tab in VS Code.
+2. Run the following:
+   ```bash
+   npx create-react-app frontend
+   cd frontend
+   npm install axios react-router-dom
+   ```
+
+### 🧩 Step 5: Run the Full Stack App
+
+- In one terminal, run the backend:
+  ```bash
+  cd backend
+  node server.js
+  ```
+
+- In another terminal, run the frontend:
+  ```bash
+  cd frontend
+  npm start
+  ```
+
+---
+
+With these steps, you’ll be able to code, run, and debug both the frontend and backend inside Visual Studio Code.
