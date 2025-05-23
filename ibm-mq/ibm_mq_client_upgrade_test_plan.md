@@ -1,9 +1,5 @@
 
-# IBM MQ Client Upgrade Test Plan (RHEL Only)
-
-**Version**: 1.0  
-**Date**: 2025-05-23  
-**Prepared By**: Infrastructure Support Team
+# IBM MQ Client Upgrade Test Plan
 
 ## Objective
 Ensure upgraded IBM MQ client works correctly on RHEL with existing MQ servers and integrations.
@@ -14,7 +10,7 @@ Ensure upgraded IBM MQ client works correctly on RHEL with existing MQ servers a
 
 ## Environment
 - OS: RHEL 8
-- MQ Client: v9.2 → v9.3
+- MQ Client: v9.3 → v9.4
 - MQ Server: MQ v9.2 or v9.3
 - Tools: systemd services, CLI tools, logs
 
@@ -64,14 +60,6 @@ Ensure upgraded IBM MQ client works correctly on RHEL with existing MQ servers a
 
 ## Rollback
 1. Stop MQ-related services
-2. Remove v9.3 RPMs
-3. Reinstall v9.2
+2. Remove v9.4 RPMs
+3. Reinstall v9.3
 4. Restore config files
-
-## Approval
-
-| Name         | Role           |
-|--------------|----------------|
-| J. Doe       | Team Lead      |
-| J. Smith     | QA Manager     |
-| A. Brown     | DevOps         |
