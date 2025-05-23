@@ -1,111 +1,77 @@
 
-# IBM MQ Client Upgrade Test Plan
+# IBM MQ Client Upgrade Test Plan (RHEL Only)
 
-## 1. Objective
+**Version**: 1.0  
+**Date**: 2025-05-23  
+**Prepared By**: Infrastructure Support Team
 
-To validate that IBM MQ client upgrade is successfully implemented across supported platforms with no regressions in messaging functionality, connectivity, or security. The test plan ensures applications using MQ continue to function as expected post-upgrade.
+## Objective
+Ensure upgraded IBM MQ client works correctly on RHEL with existing MQ servers and integrations.
 
-## 2. Scope
+## Scope
+- **In**: MQ client upgrade on RHEL, connectivity, messaging, SSL, integration checks
+- **Out**: Non-RHEL systems, MQ server upgrades, app code changes
 
-### In Scope
-- Upgrade IBM MQ Client (e.g., from v9.3 to v9.4) on supported platforms (Windows, Linux)
-- Validate compatibility with existing MQ Servers/Brokers
-- Validate connections to queue managers
-- Ensure messaging functionality for client applications
-- SSL/TLS validation (if enabled)
-- Regression testing of scripts, services, and monitoring tools using the MQ client
+## Environment
+- OS: RHEL 8
+- MQ Client: v9.2 → v9.3
+- MQ Server: MQ v9.2 or v9.3
+- Tools: systemd services, CLI tools, logs
 
-### Out of Scope
-- Server-side MQ upgrades
-- Application code changes (unless compatibility issue is found)
+## Test Areas
 
-## 3. Assumptions
-- IBM MQ server versions remain unchanged during this testing.
-- All test environments are available and representative of production.
-- Existing MQ configurations are documented and backed up.
+1. **Installation**
+   - Install and upgrade using RPM/yum
+   - Validate rollback
 
-## 4. Test Environment
+2. **Connectivity**
+   - Connect to remote MQ servers
+   - Verify port and channel configs
 
-| Component          | Description                          |
-|--------------------|--------------------------------------|
-| OS Versions        | Windows Server 2019, RHEL 8          |
-| MQ Client Version  | From v9.2.x to v9.3.x                |
-| MQ Server Version  | MQ v9.2.x or 9.3.x                   |
-| Applications       | Consumer/Producer test apps          |
-| Certificates       | If TLS/SSL is used                   |
-| Scripts/Tools      | Cron jobs, systemd services, etc.    |
+3. **Messaging**
+   - Produce/consume test messages
+   - Verify persistence and queue depth
 
-## 5. Test Scenarios
+4. **Security**
+   - SSL/TLS tests
+   - Certificate and auth validation
 
-### 5.1 Installation & Rollback
-- Install MQ client on a clean machine
-- Upgrade MQ client on an existing installation
-- Validate rollback procedure and test reinstallation
+5. **System Integration**
+   - Test systemd services
+   - Validate app integration and error logs
 
-### 5.2 Connection Tests
-- Connect to local and remote MQ queue managers
-- Validate channel and port configurations
-- Verify client channel definitions (CCDT if applicable)
+6. **Monitoring**
+   - Ensure logs are collected
+   - Validate resource usage with `top`, `ps`
 
-### 5.3 Messaging Functionality
-- Send messages to queues
-- Retrieve messages from queues
-- Browse queue depth before and after operations
-- Test both persistent and non-persistent messages
+7. **Performance**
+   - Compare pre/post-upgrade throughput
 
-### 5.4 Security and Authentication
-- SSL/TLS handshake validation
-- User authentication (LDAP/local)
-- Channel encryption validation
-- Certificate validation (expiry, CN match, etc.)
+## Data
+- Types: XML, JSON, plain text
+- Sizes: 1KB to 10MB
+- Load: ~10,000 messages
 
-### 5.5 Application Integration
-- Run integration tests for dependent applications
-- Validate MQ error handling in app logs
-- Confirm reconnection logic works after restart
+## Pass Criteria
+- No install/upgrade errors
+- Stable connectivity and messaging
+- Functional integration
+- No major performance regressions
 
-### 5.6 Logging and Monitoring
-- Ensure MQ client logs are generated as expected
-- Check monitoring tools (e.g., Prometheus, Splunk) continue to capture MQ-related data
+## Risks
+- Config issues → Pre-validation
+- Downtime → Prepare rollback script
 
-### 5.7 Performance
-- Benchmark message throughput before and after upgrade
-- Monitor CPU/memory usage of MQ client processes
-- Identify any latency differences post-upgrade
+## Rollback
+1. Stop MQ-related services
+2. Remove v9.3 RPMs
+3. Reinstall v9.2
+4. Restore config files
 
-## 6. Test Data
+## Approval
 
-Use production-like test queues and sample payloads:
-- XML, JSON, text messages
-- Varying sizes (1KB, 1MB, 10MB)
-- Stress testing with 10k+ messages
-
-## 7. Pass/Fail Criteria
-
-| Criteria                              | Pass Condition                                     |
-|---------------------------------------|----------------------------------------------------|
-| Installation                          | Completes with no errors                           |
-| Connectivity                          | Able to connect to all configured MQ servers       |
-| Message Flow                          | Messages sent and received correctly               |
-| Security                              | SSL/TLS validation succeeds                        |
-| Application Integration               | No MQ-related errors in application logs           |
-| Performance                           | No significant degradation compared to baseline    |
-| Monitoring/Logging                    | Logs are captured and structured as before         |
-
-## 8. Risks and Mitigations
-
-| Risk                                  | Mitigation                                         |
-|---------------------------------------|----------------------------------------------------|
-| Incompatible configuration files      | Validate `.ini`, `.tab` files before rollout       |
-| Broken application integration        | Run regression suite in staging                    |
-| Downtime due to failed upgrade        | Maintain rollback plan with old installer          |
-
-## 9. Rollback Plan
-
-1. Stop all MQ client services.
-2. Uninstall MQ Client v9.4.
-3. Reinstall MQ Client v9.3.
-4. Restore configuration files from backup.
-5. Verify connectivity and functionality.
-
-
+| Name         | Role           |
+|--------------|----------------|
+| J. Doe       | Team Lead      |
+| J. Smith     | QA Manager     |
+| A. Brown     | DevOps         |
