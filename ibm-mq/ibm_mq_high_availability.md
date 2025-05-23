@@ -81,4 +81,3 @@ IBM MQ is designed for **high availability (HA)** to ensure continuous messaging
 
 ---
 
-Would you like examples or setup guides for these scenarios?

@@ -46,6 +46,4 @@ IBM MQ uses the **local file system** for data persistence.
 
 ---
 
-Would you like to learn about:
-- High availability and failover?
-- How message persistence works in depth?
+
