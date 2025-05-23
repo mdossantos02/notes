@@ -1,10 +1,6 @@
 
 # IBM MQ Client Upgrade Test Plan
 
-**Document Version**: 1.0  
-**Prepared By**: Infrastructure Support Team  
-**Date**: 2025-05-23
-
 ## 1. Objective
 
 To validate that IBM MQ client upgrade is successfully implemented across supported platforms with no regressions in messaging functionality, connectivity, or security. The test plan ensures applications using MQ continue to function as expected post-upgrade.
@@ -12,7 +8,7 @@ To validate that IBM MQ client upgrade is successfully implemented across suppor
 ## 2. Scope
 
 ### In Scope
-- Upgrade IBM MQ Client (e.g., from v9.2 to v9.3) on supported platforms (Windows, Linux)
+- Upgrade IBM MQ Client (e.g., from v9.3 to v9.4) on supported platforms (Windows, Linux)
 - Validate compatibility with existing MQ Servers/Brokers
 - Validate connections to queue managers
 - Ensure messaging functionality for client applications
@@ -107,15 +103,9 @@ Use production-like test queues and sample payloads:
 ## 9. Rollback Plan
 
 1. Stop all MQ client services.
-2. Uninstall MQ Client v9.3.
-3. Reinstall MQ Client v9.2.
+2. Uninstall MQ Client v9.4.
+3. Reinstall MQ Client v9.3.
 4. Restore configuration files from backup.
 5. Verify connectivity and functionality.
 
-## 10. Approval
 
-| Name           | Role               | Signature       | Date          |
-|----------------|--------------------|-----------------|---------------|
-| John Doe       | Infra Team Lead    |                 |               |
-| Jane Smith     | QA Manager         |                 |               |
-| Alex Brown     | DevOps Engineer    |                 |               |
